@@ -6,7 +6,6 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Reset />
-      <h1>Hello</h1>
     </ThemeProvider>
   );
 }

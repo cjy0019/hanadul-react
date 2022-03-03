@@ -25,6 +25,7 @@ const Button = styled.button<{ buttonTheme?: ButtonTheme }>`
   ${(props) =>
     props.buttonTheme === 'email' &&
     css`
+      color: ${({ theme }) => theme.colors.white};
       background-color: ${(props) => props.theme.colors.lightGreen};
     `}
 

@@ -20,9 +20,11 @@ const LoginButton: FC<ButtonProps> = ({ children, handleClick, buttonTheme }) =>
 
 const Button = styled.button<{ buttonTheme?: ButtonTheme }>`
   border: none;
+  cursor: pointer;
   border-radius: 5px;
-  width: 200px;
+  width: 100%;
   height: 40px;
+
   ${(props) =>
     props.buttonTheme === 'email' &&
     css`

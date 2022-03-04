@@ -1,7 +1,3 @@
-import { ThemeProvider } from 'styled-components';
-import { Reset } from 'styled-reset';
-import theme from '../src/styles/theme';
-
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   options: {
@@ -15,12 +11,3 @@ export const parameters = {
     },
   },
 };
-
-export const decorators = [
-  (Story) => (
-    <ThemeProvider theme={theme}>
-      <Reset />
-      <Story />
-    </ThemeProvider>
-  ),
-];

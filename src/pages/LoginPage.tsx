@@ -5,7 +5,7 @@ import LoginTemplate from '../components/login/template/LoginTemplate';
 const LoginPage = () => {
   return (
     <>
-      <div>LoginPage</div>
+      <h1>LoginPage</h1>
       <LoginTemplate />
     </>
   );

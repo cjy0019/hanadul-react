@@ -1,5 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
+import palette from '../../../styles/palette';
 
 type ButtonTheme = 'kakao' | 'apple' | 'email' | 'google';
 
@@ -25,26 +26,26 @@ const Button = styled.button<{ buttonTheme?: ButtonTheme }>`
   ${(props) =>
     props.buttonTheme === 'email' &&
     css`
-      color: ${({ theme }) => theme.colors.white};
-      background-color: ${(props) => props.theme.colors.lightGreen};
+      color: ${palette.white};
+      background-color: ${palette.lightGreen};
     `}
 
   ${(props) =>
     props.buttonTheme === 'google' &&
     css`
-      background-color: ${(props) => props.theme.colors.white};
+      background-color: ${palette.white};
     `}
 
     ${(props) =>
     props.buttonTheme === 'kakao' &&
     css`
-      background-color: ${(props) => props.theme.colors.mustard};
+      background-color: ${palette.mustard};
     `}
 
     ${(props) =>
     props.buttonTheme === 'apple' &&
     css`
-      background-color: ${(props) => props.theme.colors.lightRed};
+      background-color: ${palette.lightRed};
     `}
 `;
 export default LoginButton;

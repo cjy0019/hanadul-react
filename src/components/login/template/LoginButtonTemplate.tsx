@@ -1,18 +1,26 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import LoginButton from '../atoms/LoginButton';
 import LoginTitle from '../atoms/LoginTitle';
 import { ReactComponent as Logo } from '../../../assets/icon/hanadul-logo.svg';
 import Contents from '../../common/Contents';
 import Container from '../../common/Container';
+import { useNavigate } from 'react-router-dom';
 
 const LoginButtons: React.FC = () => {
+  const navigate = useNavigate();
+
+  const navigateToEmailLogin = useCallback(() => {
+    navigate('/login');
+  }, [navigate]);
   return (
     <Container>
       <Contents>
         <StyledLogo />
         <LoginTitle />
-        <LoginButton buttonTheme="email">Email Login</LoginButton>
+        <LoginButton handleClick={navigateToEmailLogin} buttonTheme="email">
+          Email Login
+        </LoginButton>
         <LoginButton buttonTheme="google">Google Login</LoginButton>
         <LoginButton buttonTheme="kakao">Kakao Login</LoginButton>
         <LoginButton buttonTheme="apple">Apple Login</LoginButton>

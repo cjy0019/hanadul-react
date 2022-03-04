@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Reset } from 'styled-reset';
+import EmailLoginPage from './pages/EmailLoginPage';
 import LoginPage from './pages/LoginPage';
 
 function App() {
@@ -8,6 +8,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage />} />
+          <Route path="login" element={<EmailLoginPage />} />
         </Routes>
       </BrowserRouter>
     </>

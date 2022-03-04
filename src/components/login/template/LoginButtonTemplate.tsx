@@ -1,15 +1,24 @@
 import React from 'react';
+import styled from 'styled-components';
+import palette from '../../../styles/palette';
 import LoginButton from '../atoms/LoginButton';
+import LoginTitle from '../atoms/LoginTitle';
 
-const LoginTemplate = () => {
+const LoginButtons: React.FC = () => {
   return (
-    <div>
+    <Container>
+      <LoginTitle />
       <LoginButton buttonTheme="email">Email Login</LoginButton>
       <LoginButton buttonTheme="google">Google Login</LoginButton>
       <LoginButton buttonTheme="kakao">Kakao Login</LoginButton>
       <LoginButton buttonTheme="apple">Apple Login</LoginButton>
-    </div>
+    </Container>
   );
 };
 
-export default LoginTemplate;
+const Container = styled.div`
+  background-color: ${palette.black};
+  height: 350px;
+`;
+
+export default LoginButtons;

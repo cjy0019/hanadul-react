@@ -1,14 +1,19 @@
-import React from 'react';
-import LoginButton from '../components/login/atoms/LoginButton';
-import LoginTemplate from '../components/login/template/LoginTemplate';
+import styled from 'styled-components';
+import LoginTemplate from '../components/login/template/LoginButtonTemplate';
 
-const LoginPage = () => {
+const LoginPage: React.FC = () => {
   return (
-    <>
-      <h1>LoginPage</h1>
+    <Wrapper>
       <LoginTemplate />
-    </>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  background-color: yellow;
+`;
 
 export default LoginPage;

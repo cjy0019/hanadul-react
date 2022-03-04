@@ -15,7 +15,7 @@ const StyledContents = styled.div`
   gap: 1rem;
 
   & > h1 {
-    margin-bottom: 1rem;
+    margin-bottom: 2.5rem;
   }
 `;
 

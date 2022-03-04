@@ -23,7 +23,8 @@ const Button = styled.button<{ buttonTheme?: ButtonTheme }>`
   cursor: pointer;
   border-radius: 5px;
   width: 100%;
-  height: 40px;
+  height: 50px;
+  font-size: 1.1rem;
 
   ${(props) =>
     props.buttonTheme === 'email' &&

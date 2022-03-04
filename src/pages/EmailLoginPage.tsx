@@ -1,7 +1,8 @@
 import React from 'react';
+import EmailLoginTemplate from '../components/login/template/EmailLoginTemplate';
 
 const EmailLoginPage = () => {
-  return <div>EmailLoginPage</div>;
+  return <EmailLoginTemplate />;
 };
 
 export default EmailLoginPage;

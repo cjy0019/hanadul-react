@@ -7,7 +7,7 @@ const LoginTitle: React.FC = () => {
 };
 
 const Title = styled.h1`
-  font-size: 2.4rem;
+  font-size: 3.5rem;
   font-family: 'pacifico';
   color: ${palette.white};
 `;

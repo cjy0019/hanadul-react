@@ -23,7 +23,7 @@ const EmailLoginTemplate: React.FC = () => {
         <LoginButton buttonTheme="email">Login</LoginButton>
         <LinkContainer>
           <LinkWrapper>
-            <Link to="/">Don't have a Hanadul account yet?</Link>
+            <Link to="/register">Don't have a Hanadul account yet?</Link>
           </LinkWrapper>
           <LinkWrapper>
             <Link to="/">Forgot your Email or Password</Link>

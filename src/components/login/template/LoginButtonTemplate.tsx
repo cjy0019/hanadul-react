@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
-import LoginButton from '../atoms/LoginButton';
 import LoginTitle from '../atoms/LoginTitle';
 import Contents from '../../common/Contents';
 import Container from '../../common/Container';
 import { useNavigate } from 'react-router-dom';
 import { StyledLogo } from '../../common/StyledLogo';
+import LongButton from '../atoms/LongButton';
 
 const LoginButtons: React.FC = () => {
   const navigate = useNavigate();
@@ -17,12 +17,12 @@ const LoginButtons: React.FC = () => {
       <Contents>
         <StyledLogo />
         <LoginTitle />
-        <LoginButton handleClick={navigateToEmailLogin} buttonTheme="email">
+        <LongButton handleClick={navigateToEmailLogin} buttonTheme="email">
           Email Login
-        </LoginButton>
-        <LoginButton buttonTheme="google">Google Login</LoginButton>
-        <LoginButton buttonTheme="kakao">Kakao Login</LoginButton>
-        <LoginButton buttonTheme="apple">Apple Login</LoginButton>
+        </LongButton>
+        <LongButton buttonTheme="google">Google Login</LongButton>
+        <LongButton buttonTheme="kakao">Kakao Login</LongButton>
+        <LongButton buttonTheme="apple">Apple Login</LongButton>
       </Contents>
     </Container>
   );

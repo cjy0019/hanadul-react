@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../../styles/palette';
 
-type ButtonTheme = 'kakao' | 'apple' | 'email' | 'google';
+type ButtonTheme = 'kakao' | 'apple' | 'email' | 'google' | 'goBack';
 
 interface ButtonProps {
   children?: ReactNode | undefined;
@@ -10,7 +10,7 @@ interface ButtonProps {
   buttonTheme: ButtonTheme;
 }
 
-const LoginButton: FC<ButtonProps> = ({ children, handleClick, buttonTheme }) => {
+const LongButton: FC<ButtonProps> = ({ children, handleClick, buttonTheme }) => {
   return (
     <Button buttonTheme={buttonTheme} onClick={handleClick}>
       {children}
@@ -50,5 +50,12 @@ const Button = styled.button<{ buttonTheme?: ButtonTheme }>`
     css`
       background-color: ${palette.lightRed};
     `}
+
+    ${(props) =>
+    props.buttonTheme === 'goBack' &&
+    css`
+      background-color: ${palette.warningRed};
+      color: ${palette.white};
+    `}
 `;
-export default LoginButton;
+export default LongButton;

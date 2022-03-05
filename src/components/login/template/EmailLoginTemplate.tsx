@@ -5,7 +5,7 @@ import palette from '../../../styles/palette';
 import Container from '../../common/Container';
 import Contents from '../../common/Contents';
 import { StyledLogo } from '../../common/StyledLogo';
-import LoginButton from '../atoms/LoginButton';
+import LongButton from '../atoms/LongButton';
 import LoginTitle from '../atoms/LoginTitle';
 
 const EmailLoginTemplate: React.FC = () => {
@@ -20,7 +20,7 @@ const EmailLoginTemplate: React.FC = () => {
           <input type="checkbox" id="auto-login" />
           <label htmlFor="auto-login">Auto Login</label>
         </CheckboxWrapper>
-        <LoginButton buttonTheme="email">Login</LoginButton>
+        <LongButton buttonTheme="email">Login</LongButton>
         <LinkContainer>
           <LinkWrapper>
             <Link to="/register">Don't have a Hanadul account yet?</Link>

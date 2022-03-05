@@ -1,6 +1,7 @@
 const palette = {
   lightGreen: '#2799A3',
   lightRed: '#FF7E7E',
+  warningRed: '#FC4E4E',
   mustard: '#FFD84D',
   darkWhite: '#dfdfdf',
   white: '#fff',

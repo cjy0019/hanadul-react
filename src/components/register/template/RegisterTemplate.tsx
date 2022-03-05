@@ -1,7 +1,8 @@
 import React, { FC, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import palette from '../../../styles/palette';
+import { Validate } from '../../../utils/validation/validate';
 import Container from '../../common/Container';
 import SubTitle from '../../common/SubTitle';
 import LongButton from '../../login/atoms/LongButton';
@@ -10,17 +11,18 @@ type Email = {
   emailId: string;
   isValidate?: boolean;
 };
-const EMAIL_REGEX = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+
+interface StyledValidate {
+  isEmailValidate?: boolean;
+  isPasswordValidate?: boolean;
+}
 
 const RegisterTemplate: FC = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState<Email>({ emailId: '', isValidate: false });
+
+  const [email, setEmail] = useState<Email>({ emailId: '', isValidate: true });
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
-
-  function validateEmail(email: string) {
-    return EMAIL_REGEX.test(email);
-  }
 
   const goBack = useCallback(() => {
     navigate(-1);
@@ -28,8 +30,12 @@ const RegisterTemplate: FC = () => {
 
   const handleEmail = useCallback<(e: React.ChangeEvent<HTMLInputElement>) => void>(
     (e) => {
-      if (validateEmail(email.emailId)) {
+      const validate = new Validate();
+
+      if (validate.email(email.emailId)) {
         setEmail({ ...email, emailId: e.target.value, isValidate: true });
+      } else if (email.emailId.length === 0) {
+        setEmail({ ...email, emailId: e.target.value, isValidate: false });
       } else {
         setEmail({ ...email, emailId: e.target.value, isValidate: false });
       }
@@ -49,7 +55,13 @@ const RegisterTemplate: FC = () => {
     <Container>
       <Contents>
         <SubTitle>Register</SubTitle>
-        <StyledInput type="text" placeholder="EMAIL" value={email.emailId} onChange={handleEmail} />
+        <StyledInput
+          type="text"
+          placeholder="EMAIL"
+          value={email.emailId}
+          onChange={handleEmail}
+          isEmailValidate={email.isValidate}
+        />
         {!email.isValidate && <ValidateText>Please Enter valid email address.</ValidateText>}
         <StyledInput type="password" placeholder="PASSWORD" value={password} onChange={handlePassword} />
         <div>dd</div>
@@ -100,7 +112,7 @@ const PaswordConfirmWrapper = styled.div`
   width: 100%;
 `;
 
-const StyledInput = styled.input`
+const StyledInput = styled.input<StyledValidate>`
   width: 100%;
   padding: 1rem 1rem;
   font-size: 1.2rem;
@@ -108,6 +120,13 @@ const StyledInput = styled.input`
   background-color: transparent;
   border: 1px solid ${palette.lightGray};
   border-radius: 5px;
+  outline: 1px solid ${palette.lightGray};
+
+  ${(props) =>
+    !props.isEmailValidate &&
+    css`
+      border: 1px solid ${palette.warningRed};
+    `}
 `;
 
 const StyledP = styled.p`

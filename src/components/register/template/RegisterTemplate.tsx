@@ -18,8 +18,8 @@ const RegisterTemplate: FC = () => {
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
 
-  function validateEmail(emails: any) {
-    return test(emails);
+  function validateEmail(email: string) {
+    return EMAIL_REGEX.test(email);
   }
 
   const goBack = useCallback(() => {
@@ -28,7 +28,11 @@ const RegisterTemplate: FC = () => {
 
   const handleEmail = useCallback<(e: React.ChangeEvent<HTMLInputElement>) => void>(
     (e) => {
-      setEmail({ ...email, emailId: e.target.value });
+      if (validateEmail(email.emailId)) {
+        setEmail({ ...email, emailId: e.target.value, isValidate: true });
+      } else {
+        setEmail({ ...email, emailId: e.target.value, isValidate: false });
+      }
     },
     [email]
   );
@@ -46,7 +50,7 @@ const RegisterTemplate: FC = () => {
       <Contents>
         <SubTitle>Register</SubTitle>
         <StyledInput type="text" placeholder="EMAIL" value={email.emailId} onChange={handleEmail} />
-        <div>Please Enter valid email address.</div>
+        {!email.isValidate && <ValidateText>Please Enter valid email address.</ValidateText>}
         <StyledInput type="password" placeholder="PASSWORD" value={password} onChange={handlePassword} />
         <div>dd</div>
         <PaswordConfirmWrapper>
@@ -85,7 +89,10 @@ const Contents = styled.div`
 `;
 
 const ValidateText = styled.p`
+  width: 100%;
   color: ${palette.warningRed};
+  padding-left: 1.2rem;
+  padding-top: 0.5rem;
 `;
 
 const PaswordConfirmWrapper = styled.div`

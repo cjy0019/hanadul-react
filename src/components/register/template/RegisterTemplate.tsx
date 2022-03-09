@@ -51,6 +51,7 @@ const RegisterTemplate: FC = () => {
           />
           <StyledP>PASSWORD CONFIRM</StyledP>
           {passwordConfirm.isValidate && <ValidateText>Please enter same password.</ValidateText>}
+          {!passwordConfirm.isValidate && <EmptySpace />}
         </PaswordConfirmWrapper>
 
         <ButtonWrapper>
@@ -81,17 +82,17 @@ const ValidateText = styled.p`
   width: 100%;
   color: ${palette.warningRed};
   padding-left: 1.2rem;
-  padding-top: 0.7rem;
-  padding-bottom: 0.7rem;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
 `;
 
 const EmptySpace = styled.div<StyledValidate>`
-  height: 40px;
+  padding: 1.3rem 0.8rem;
 
   ${(props) =>
     props.emptyLines &&
     css`
-      height: 60px;
+      padding: 1.8rem 0.5rem;
     `}
 `;
 
@@ -142,7 +143,6 @@ const ButtonWrapper = styled.div`
   flex-direction: column;
   gap: 0.8rem;
   width: 100%;
-  margin-top: 40px;
 `;
 
 export default RegisterTemplate;

@@ -1,55 +1,21 @@
-import React, { FC, useCallback, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
+import { useRegister } from '../../../hooks/useRegister';
 import palette from '../../../styles/palette';
-import { Validate } from '../../../utils/validation/validate';
 import Container from '../../common/Container';
 import SubTitle from '../../common/SubTitle';
 import LongButton from '../../login/atoms/LongButton';
 
-type Email = {
-  emailId: string;
-  isValidate?: boolean;
-};
-
 interface StyledValidate {
   isEmailValidate?: boolean;
   isPasswordValidate?: boolean;
+  isPasswordConfirmValidate?: boolean;
+  emptyLines?: boolean;
 }
 
 const RegisterTemplate: FC = () => {
-  const navigate = useNavigate();
-
-  const [email, setEmail] = useState<Email>({ emailId: '', isValidate: true });
-  const [password, setPassword] = useState<string>('');
-  const [passwordConfirm, setPasswordConfirm] = useState<string>('');
-
-  const goBack = useCallback(() => {
-    navigate(-1);
-  }, [navigate]);
-
-  const handleEmail = useCallback<(e: React.ChangeEvent<HTMLInputElement>) => void>(
-    (e) => {
-      const validate = new Validate();
-
-      if (validate.email(email.emailId)) {
-        setEmail({ ...email, emailId: e.target.value, isValidate: true });
-      } else if (email.emailId.length === 0) {
-        setEmail({ ...email, emailId: e.target.value, isValidate: false });
-      } else {
-        setEmail({ ...email, emailId: e.target.value, isValidate: false });
-      }
-    },
-    [email]
-  );
-
-  const handlePassword = useCallback<(e: React.ChangeEvent<HTMLInputElement>) => void>((e) => {
-    setPassword(e.target.value);
-  }, []);
-
-  const handlePasswordConfirm = useCallback<(e: React.ChangeEvent<HTMLInputElement>) => void>((e) => {
-    setPasswordConfirm(e.target.value);
-  }, []);
+  const { goBack, handleEmail, handlePassword, email, password, passwordConfirm, handlePasswordConfirm } =
+    useRegister();
 
   return (
     <Container>
@@ -60,20 +26,31 @@ const RegisterTemplate: FC = () => {
           placeholder="EMAIL"
           value={email.emailId}
           onChange={handleEmail}
-          isEmailValidate={email.isValidate}
+          isEmailValidate={!email.isValidate}
         />
         {!email.isValidate && <ValidateText>Please Enter valid email address.</ValidateText>}
-        <StyledInput type="password" placeholder="PASSWORD" value={password} onChange={handlePassword} />
-        <div>dd</div>
+        {email.isValidate && <EmptySpace />}
+        <StyledInput
+          type="password"
+          placeholder="PASSWORD"
+          value={password.userPassword}
+          onChange={handlePassword}
+          isPasswordValidate={!password.isValidate}
+        />
+        {!password.isValidate && (
+          <ValidateText>Passwords must be 8 ~ 16 characters and contain uppercase letters and symbols.</ValidateText>
+        )}
+        {password.isValidate && <EmptySpace emptyLines />}
         <PaswordConfirmWrapper>
           <StyledInput
             type="password"
             placeholder="PASSWORD CONFIRM"
-            value={passwordConfirm}
+            value={passwordConfirm.userPasswordConfirm}
             onChange={handlePasswordConfirm}
+            isPasswordConfirmValidate={passwordConfirm.isValidate}
           />
           <StyledP>PASSWORD CONFIRM</StyledP>
-          <div>dd</div>
+          {passwordConfirm.isValidate && <ValidateText>Please enter same password.</ValidateText>}
         </PaswordConfirmWrapper>
 
         <ButtonWrapper>
@@ -104,7 +81,18 @@ const ValidateText = styled.p`
   width: 100%;
   color: ${palette.warningRed};
   padding-left: 1.2rem;
-  padding-top: 0.5rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+`;
+
+const EmptySpace = styled.div<StyledValidate>`
+  height: 40px;
+
+  ${(props) =>
+    props.emptyLines &&
+    css`
+      height: 60px;
+    `}
 `;
 
 const PaswordConfirmWrapper = styled.div`
@@ -123,7 +111,19 @@ const StyledInput = styled.input<StyledValidate>`
   outline: 1px solid ${palette.lightGray};
 
   ${(props) =>
-    !props.isEmailValidate &&
+    props.isEmailValidate &&
+    css`
+      border: 1px solid ${palette.warningRed};
+    `}
+
+  ${(props) =>
+    props.isPasswordValidate &&
+    css`
+      border: 1px solid ${palette.warningRed};
+    `}
+
+  ${(props) =>
+    props.isPasswordConfirmValidate &&
     css`
       border: 1px solid ${palette.warningRed};
     `}
@@ -142,6 +142,7 @@ const ButtonWrapper = styled.div`
   flex-direction: column;
   gap: 0.8rem;
   width: 100%;
+  margin-top: 40px;
 `;
 
 export default RegisterTemplate;

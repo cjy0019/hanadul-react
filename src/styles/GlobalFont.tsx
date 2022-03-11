@@ -9,7 +9,7 @@ export default createGlobalStyle`
     font-weight: normal;
   }
 
-@font-face {
+  @font-face {
     font-family: pacifico;
     src: local('pacifico'),url(${pacifico}) format('woff')
   }

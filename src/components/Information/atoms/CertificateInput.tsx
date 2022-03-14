@@ -14,6 +14,7 @@ const StyledInput = styled.input`
   border-bottom: 1px solid ${palette.white};
   padding: 1rem 0;
   border-radius: 4px;
+  padding-left: 10px;
   color: ${palette.white};
 `;
 

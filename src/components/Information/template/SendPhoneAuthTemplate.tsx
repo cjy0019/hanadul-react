@@ -1,7 +1,8 @@
-import React from 'react';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { SelectChangeEvent } from '@mui/material/Select/SelectInput';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import palette from '../../../styles/palette';
 import Container from '../../common/Container';
 import Contents from '../../common/Contents';
 import SubTitle from '../../common/SubTitle';
@@ -10,6 +11,11 @@ import CertificateInput from '../atoms/CertificateInput';
 
 const SendPhoneAuthTemplate: React.FC = () => {
   const navigate = useNavigate();
+  const [nation, setNation] = useState<string>('');
+
+  const handleChange = (e: SelectChangeEvent<string>) => {
+    setNation(e.target.value);
+  };
 
   return (
     <Container>
@@ -17,12 +23,27 @@ const SendPhoneAuthTemplate: React.FC = () => {
         <SubTitle>Information</SubTitle>
         <NationWrapper>
           <SelectWrapper>
-            <p>Nation</p>
-            <select name="Nation">
-              <option value="SouthKorea">South Korea</option>
-              <option value="USA">United States</option>
-              <option value="England">England</option>
-            </select>
+            <FormControl fullWidth>
+              <InputLabel style={{ color: '#ffffff' }} id="nation-select">
+                Nation
+              </InputLabel>
+              <Select
+                style={{
+                  borderBottom: '1px solid white',
+                  color: '#ffffff',
+                  outline: 'none',
+                }}
+                onChange={handleChange}
+                value={nation}
+                labelId="nation-select"
+                id="nation-select"
+                label="Nation"
+              >
+                <MenuItem value="South Korea">South Korea</MenuItem>
+                <MenuItem value="North Korea">North Korea</MenuItem>
+                <MenuItem value="United States">United States</MenuItem>
+              </Select>
+            </FormControl>
           </SelectWrapper>
           <CertificateInput placeHolder="PHONE" />
         </NationWrapper>
@@ -51,20 +72,18 @@ const SelectWrapper = styled.div`
   width: 100%;
   gap: 1rem;
 
-  & > select {
-    width: 100%;
-    border: none;
-    background-color: ${palette.black};
-    font-size: 1.1rem;
-    border-bottom: 1px solid white;
-    color: ${palette.white};
-    padding: 0.5rem;
-  }
-
   & > p {
     color: white;
     font-size: 1.2rem;
   }
+`;
+
+const DropDown = styled.div`
+  color: #fff;
+  width: 100%;
+  border-bottom: 1px solid white;
+  padding: 0 0 3px 3px;
+  font-size: 1.2rem;
 `;
 
 const ButtonWrapper = styled.div`

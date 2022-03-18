@@ -3,6 +3,7 @@ import { SelectChangeEvent } from '@mui/material/Select/SelectInput';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useCustomNavigate } from '../../../hooks/useCustomNavigate';
 import Container from '../../common/Container';
 import Contents from '../../common/Contents';
 import SubTitle from '../../common/SubTitle';
@@ -10,7 +11,7 @@ import LongButton from '../../login/atoms/LongButton';
 import CertificateInput from '../atoms/CertificateInput';
 
 const SendPhoneAuthTemplate: React.FC = () => {
-  const navigate = useNavigate();
+  const { goBack } = useCustomNavigate();
   const [nation, setNation] = useState<string>('');
 
   const handleChange = (e: SelectChangeEvent<string>) => {
@@ -49,7 +50,7 @@ const SendPhoneAuthTemplate: React.FC = () => {
         </NationWrapper>
         <ButtonWrapper>
           <LongButton buttonTheme="email">SEND CODE</LongButton>
-          <LongButton handleClick={() => navigate(-1)} buttonTheme="goBack">
+          <LongButton handleClick={() => goBack} buttonTheme="goBack">
             BACK
           </LongButton>
         </ButtonWrapper>
@@ -76,14 +77,6 @@ const SelectWrapper = styled.div`
     color: white;
     font-size: 1.2rem;
   }
-`;
-
-const DropDown = styled.div`
-  color: #fff;
-  width: 100%;
-  border-bottom: 1px solid white;
-  padding: 0 0 3px 3px;
-  font-size: 1.2rem;
 `;
 
 const ButtonWrapper = styled.div`

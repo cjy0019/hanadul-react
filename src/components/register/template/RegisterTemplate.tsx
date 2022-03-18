@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
+import { useCustomNavigate } from '../../../hooks/useCustomNavigate';
 import { useRegister } from '../../../hooks/useRegister';
 import palette from '../../../styles/palette';
 import Container from '../../common/Container';
@@ -14,8 +15,8 @@ interface StyledValidate {
 }
 
 const RegisterTemplate: FC = () => {
-  const { goBack, handleEmail, handlePassword, email, password, passwordConfirm, handlePasswordConfirm } =
-    useRegister();
+  const { handleEmail, handlePassword, email, password, passwordConfirm, handlePasswordConfirm } = useRegister();
+  const { goBack } = useCustomNavigate();
 
   return (
     <Container>

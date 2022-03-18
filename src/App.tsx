@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ConfirmCodePage from './pages/ConfirmCodePage';
 import EmailLoginPage from './pages/EmailLoginPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -13,6 +14,7 @@ function App() {
           <Route path="login" element={<EmailLoginPage />} />
           <Route path="register" element={<RegisterPage />} />
           <Route path="information-certification" element={<SendPhoneAuthPage />} />
+          <Route path="confirm-code" element={<ConfirmCodePage />} />
         </Routes>
       </BrowserRouter>
     </>

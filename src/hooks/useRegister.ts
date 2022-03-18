@@ -18,7 +18,6 @@ type PasswordConfirm = {
 };
 
 export function useRegister() {
-  const navigate = useNavigate();
   const [email, setEmail] = useState<Email>({ emailId: '', isValidate: true });
   const [password, setPassword] = useState<Password>({ userPassword: '', isValidate: true });
   const [passwordConfirm, setPasswordConfirm] = useState<PasswordConfirm>({
@@ -63,10 +62,6 @@ export function useRegister() {
     password.isValidate,
   ]);
 
-  const goBack = useCallback(() => {
-    navigate(-1);
-  }, [navigate]);
-
   const handleEmail = useCallback<(e: React.ChangeEvent<HTMLInputElement>) => void>(
     (e) => {
       setEmail({ ...email, emailId: e.target.value });
@@ -89,7 +84,6 @@ export function useRegister() {
   );
 
   return {
-    goBack,
     handleEmail,
     handlePassword,
     email,

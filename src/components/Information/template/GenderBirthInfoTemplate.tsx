@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
@@ -6,9 +6,27 @@ import Container from '../../common/Container';
 import Contents from '../../common/Contents';
 import SubTitle from '../../common/SubTitle';
 
+type Birth = {
+  year: string;
+  month: string;
+  day: string;
+};
+
 const GenderBirthInfoTemplate = () => {
   const [name, setName] = useState<string>('');
   const [gender, setGender] = useState<string>('');
+  const [birth, setBirth] = useState<Birth>({
+    year: '',
+    month: '',
+    day: '',
+  });
+
+  const restrictLength = (maxLength: number, birthType: string, object: React.ChangeEvent<HTMLInputElement>) => {
+    if (object.target.value.length > maxLength) return;
+    else {
+      setBirth({ ...birth, [`${birthType}`]: object.target.value });
+    }
+  };
 
   const handleChange = (e: SelectChangeEvent<string>) => {
     setGender(e.target.value);
@@ -16,6 +34,18 @@ const GenderBirthInfoTemplate = () => {
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
+  };
+
+  const handleYear = (e: React.ChangeEvent<HTMLInputElement>) => {
+    restrictLength(4, 'year', e);
+  };
+
+  const handleMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
+    restrictLength(2, 'month', e);
+  };
+
+  const handleDay = (e: React.ChangeEvent<HTMLInputElement>) => {
+    restrictLength(2, 'day', e);
   };
 
   return (
@@ -43,6 +73,15 @@ const GenderBirthInfoTemplate = () => {
             <MenuItem value="Female">Female</MenuItem>
           </Select>
         </FormControl>
+
+        <BirthContainer>
+          <p>Birth</p>
+          <input type="number" value={birth.year} onChange={handleYear} />
+          <p>/</p>
+          <input type="number" value={birth.month} onChange={handleMonth} />
+          <p>/</p>
+          <input type="number" value={birth.day} onChange={handleDay} />
+        </BirthContainer>
       </Contents>
     </Container>
   );
@@ -74,10 +113,20 @@ const BirthContainer = styled.div`
     border: 1px solid ${palette.lightGray};
     border-radius: 5px;
     height: 40px;
-    outline: none;
+    padding-left: 20px;
+    box-sizing: border-box;
+    font-size: 18px;
+  }
+
+  & > input:nth-of-type(1) {
+    width: 30%;
   }
 
   & > input:nth-of-type(2) {
+    width: 20%;
+  }
+
+  & > input:nth-of-type(3) {
     width: 20%;
   }
 `;

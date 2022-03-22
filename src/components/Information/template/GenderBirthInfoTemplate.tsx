@@ -5,6 +5,7 @@ import palette from '../../../styles/palette';
 import Container from '../../common/Container';
 import Contents from '../../common/Contents';
 import SubTitle from '../../common/SubTitle';
+import LongButton from '../../login/atoms/LongButton';
 
 type Birth = {
   year: string;
@@ -82,6 +83,8 @@ const GenderBirthInfoTemplate = () => {
           <p>/</p>
           <input type="number" value={birth.day} onChange={handleDay} />
         </BirthContainer>
+        <LongButton buttonTheme="email">OK</LongButton>
+        <LongButton buttonTheme="goBack">LOGOUT</LongButton>
       </Contents>
     </Container>
   );
